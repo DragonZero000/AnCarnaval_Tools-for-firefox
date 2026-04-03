@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Anal Carnival Tools",
+  "version": "1.2.2",
+  "description": "Экспорт персонажей LSS в DnD manager (beta)",
+
+  "permissions": [
+    "cookies",
+    "storage",
+    "activeTab"
+  ],
+
+  "host_permissions": [
+    "https://*.longstoryshort.app/*",
+    "https://api.longstoryshort.app/*"
+  ],
+
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://longstoryshort.app/*"],
+      "js": ["lib/api.js", "lib/transform.js", "content_lss.js"],
+      "css": [],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://manager.marimo.chickenkiller.com/*"],
+      "js": ["lib/api.js", "lib/transform.js"],
+      "css": [],
+      "run_at": "document_idle"
+    }
+  ],
+
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "LSS Bridge"
+  }
+}
